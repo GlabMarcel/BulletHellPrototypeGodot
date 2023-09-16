@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1twfarp6vvgi"]
+
+[ext_resource type="Texture2D" uid="uid://lnthcshnyuqa" path="res://Assets/floors/decor_16x16.png" id="1_3l87c"]
+[ext_resource type="Script" path="res://FloorGenerator.gd" id="2_ein8f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qs5ot"]
+texture = ExtResource("1_3l87c")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0ugtq"]
+sources/0 = SubResource("TileSetAtlasSource_qs5ot")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_0ugtq")
+format = 2
+script = ExtResource("2_ein8f")

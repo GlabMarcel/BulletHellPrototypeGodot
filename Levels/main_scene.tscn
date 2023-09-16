@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbjn6fvxpuw7f"]
+
+[ext_resource type="PackedScene" uid="uid://r62jxs1khu58" path="res://Assets/characters/character_body_2d.tscn" id="1_4g1gn"]
+[ext_resource type="PackedScene" uid="uid://cp4771ytad84y" path="res://Levels/spawner.tscn" id="2_f2216"]
+[ext_resource type="PackedScene" uid="uid://d1twfarp6vvgi" path="res://Levels/floor_generator.tscn" id="3_j8rlu"]
+[ext_resource type="PackedScene" uid="uid://bfmfqw825lgux" path="res://ui.tscn" id="4_7w08a"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="FloorGenerator" parent="." instance=ExtResource("3_j8rlu")]
+position = Vector2(-153, 47)
+
+[node name="Player" parent="." instance=ExtResource("1_4g1gn")]
+position = Vector2(-17, 6)
+
+[node name="Spawner" parent="." instance=ExtResource("2_f2216")]
+position = Vector2(-68, 19)
+
+[node name="UICanvas" parent="." instance=ExtResource("4_7w08a")]

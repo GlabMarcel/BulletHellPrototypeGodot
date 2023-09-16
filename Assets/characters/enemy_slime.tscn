@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://biufwutj4q63c"]
+
+[ext_resource type="Script" path="res://Assets/characters/enemy_slime.gd" id="1_b32x3"]
+[ext_resource type="Texture2D" uid="uid://cg1jtn6oret11" path="res://Assets/characters/slime.png" id="1_v5xnu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjiq6"]
+radius = 13.0
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_4pt1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_jo4co"]
+resource_name = "walk_left"
+length = 0.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nt06r"]
+resource_name = "walk_right"
+length = 0.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etemc"]
+_data = {
+"RESET": SubResource("Animation_4pt1b"),
+"walk_left": SubResource("Animation_jo4co"),
+"walk_right": SubResource("Animation_nt06r")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhx7e"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rvwt4"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_tpgy0"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hhx7e")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_rvwt4")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sfsiq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pxcbp"]
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_tpgy0")
+states/Walk/position = Vector2(440, 182)
+transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_sfsiq")]
+
+[node name="Enemy_Slime" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_b32x3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v5xnu")
+flip_h = true
+hframes = 7
+vframes = 5
+frame = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jjiq6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_etemc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pxcbp")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("")
+active = true
+parameters/Walk/blend_position = 0

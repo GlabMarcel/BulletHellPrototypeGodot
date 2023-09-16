@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfmfqw825lgux"]
+
+[ext_resource type="Script" path="res://UI.gd" id="1_yvhtt"]
+
+[sub_resource type="Theme" id="Theme_cp5ex"]
+
+[node name="UICanvas" type="CanvasLayer"]
+script = ExtResource("1_yvhtt")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_cp5ex")
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 51.0
+offset_right = 1915.0
+offset_bottom = 78.0
+
+[node name="ExperienceBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 81.0
+offset_right = 1918.0
+offset_bottom = 108.0
+
+[node name="TimerLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_right = 20.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "00:00"
