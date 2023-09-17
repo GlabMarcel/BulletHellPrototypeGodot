@@ -31,7 +31,6 @@ func _ready():
 
 # In your player script
 func gain_experience(amount):
-	print("Gain experience function called")  # Add this line to check if the function is being called
 	experience += amount
 	if experience >= experience_to_next_level:
 		level_up_player()

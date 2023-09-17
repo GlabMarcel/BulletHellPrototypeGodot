@@ -18,7 +18,7 @@ func _ready():
 	experience_bar.value = player.experience  # Assuming 'experience' is the variable holding the player's experience points in the player script
 	_on_Player_health_changed(player.hp, player.max_hp)  # Set the initial color
 
-func _process(delta):
+func _process(_delta):
 	var elapsed_time = Time.get_ticks_msec()/1000 - timer_start_time
 	var minutes = floor(elapsed_time / 60)
 	var seconds = elapsed_time % 60

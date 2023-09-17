@@ -2,7 +2,7 @@ extends Node2D
 
 @export var attack_range = 50.0
 @export var attack_damage = 1
-@export var cooldown_time = 2
+@export var cooldown_time = 0.3
 @export var bullet_speed = 400.0
 @export var float_speed = 2.0
 @export var float_amplitude = 10.0

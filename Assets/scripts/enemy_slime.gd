@@ -39,8 +39,8 @@ func die():
 	var experience_orb_scene = preload("res://Assets/Scenes/experience_orb.tscn")
 	var experience_orb = experience_orb_scene.instantiate()
 	experience_orb.global_position = self.global_position
-	get_parent().add_child(experience_orb)
-	queue_free()  # or any other death handling code
+	get_parent().call_deferred("add_child",experience_orb)
+	call_deferred("queue_free")  # or any other death handling code
 
 
 func update_anim_param():
