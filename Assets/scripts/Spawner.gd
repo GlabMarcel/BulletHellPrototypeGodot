@@ -4,8 +4,7 @@ var enemy_scene = preload("res://Assets/Scenes/enemy_slime.tscn")
 @onready var player = get_node("../Player")
 @onready var timer = get_node("Timer")
 
-# Variable to control the number of enemies spawned in each wave
-var enemies_per_wave = 5
+@export var enemies_per_wave = 5
 
 func _ready():
 	# Start the timer when the scene is loaded
@@ -17,11 +16,10 @@ func _on_timer_timeout():
 
 func spawn_enemy_wave():
 	for i in range(enemies_per_wave):
-		# Instantiate a new enemy instance
 		var enemy = enemy_scene.instantiate()
 		
 		# Set the enemy's position to a random position around the player
-		var spawn_radius = 100  # Adjust as needed
+		var spawn_radius = 200  # Adjust as needed
 		var angle = randf() * 2 * PI
 		var spawn_position = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_radius
 		
