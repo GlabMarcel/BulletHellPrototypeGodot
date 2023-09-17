@@ -289,27 +289,27 @@ _data = {
 "walk_up": SubResource("Animation_bdupr")
 }
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_mw80s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_e5r34")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["player"]]
 texture = ExtResource("1_fkd8t")
 hframes = 6
 vframes = 6
 frame = 6
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["player"]]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="Weapon_Gun" parent="." instance=ExtResource("3_1aiaj")]
+[node name="Weapon_Gun" parent="." groups=["player"] instance=ExtResource("3_1aiaj")]
 position = Vector2(1, -17)
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." groups=["player"]]
 tree_root = SubResource("AnimationNodeStateMachine_34ij6")
 anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("")
@@ -319,7 +319,7 @@ parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0, -0.1)
 parameters/Walk/blend_position = Vector2(0, -0.0305676)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["player"]]
 libraries = {
 "": SubResource("AnimationLibrary_uj4t5")
 }

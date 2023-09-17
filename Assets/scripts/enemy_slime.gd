@@ -15,40 +15,38 @@ var rng = RandomNumberGenerator.new()
 var timer = 0
 
 func _ready():
-    rng.randomize()
+	rng.randomize()
 
 func _physics_process(_delta):
-    var target_position
-    if player:
-        target_position = player.global_position
-    else:
-        target_position = get_global_mouse_position()
-    
-    var direction = target_position - global_position
-    direction = direction.normalized()
-    velocity = direction * speed
-    update_anim_param()
-    move_and_slide()
-    
+	var target_position
+	if player:
+		target_position = player.global_position
+	else:
+		target_position = get_global_mouse_position()
+	
+	var direction = target_position - global_position
+	direction = direction.normalized()
+	velocity = direction * speed
+	update_anim_param()
+	move_and_slide()
+	
 func apply_damage(damage):
-    hp = max(hp - damage, 0)
-    if hp <= 0:
-        die()
+	hp = max(hp - damage, 0)
+	if hp <= 0:
+		die()
 
 func die():
-    print("Die function called")  # To confirm the function is being called
-    var experience_orb_scene = preload("res://Assets/Scenes/experience_orb.tscn")
-    var experience_orb = experience_orb_scene.instantiate()
-    experience_orb.global_position = self.global_position
-    print("Orb global position: ", experience_orb.global_position)  # To check the spawn position
-    get_parent().add_child(experience_orb)
-    queue_free()  # or any other death handling code
+	var experience_orb_scene = preload("res://Assets/Scenes/experience_orb.tscn")
+	var experience_orb = experience_orb_scene.instantiate()
+	experience_orb.global_position = self.global_position
+	get_parent().add_child(experience_orb)
+	queue_free()  # or any other death handling code
 
 
 func update_anim_param():
-    var velocity_norm = velocity.normalized()
-    # Use only the x component of the velocity to set the blend position in the 1D blend space
-    anim_tree["parameters/Walk/blend_position"] = velocity_norm.x
+	var velocity_norm = velocity.normalized()
+	# Use only the x component of the velocity to set the blend position in the 1D blend space
+	anim_tree["parameters/Walk/blend_position"] = velocity_norm.x
 
 
 
