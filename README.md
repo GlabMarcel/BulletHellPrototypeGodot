@@ -27,9 +27,6 @@ git clone https://github.com/GlabMarcel/BulletHellPrototypeGodot.git
 
 Feel free to fork the repository and submit pull requests to contribute to this project. You can also open issues if you find any bugs or have suggestions for new features.
 
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
