@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy_scene = preload("res://Assets/characters/enemy_slime.tscn")
+var enemy_scene = preload("res://Assets/Scenes/enemy_slime.tscn")
 @onready var player = get_node("../Player")
 @onready var timer = get_node("Timer")
 

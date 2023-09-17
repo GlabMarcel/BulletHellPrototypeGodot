@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://biufwutj4q63c"]
 
-[ext_resource type="Script" path="res://Assets/characters/enemy_slime.gd" id="1_b32x3"]
+[ext_resource type="Script" path="res://Assets/scripts/enemy_slime.gd" id="1_sb2b7"]
 [ext_resource type="Texture2D" uid="uid://cg1jtn6oret11" path="res://Assets/characters/slime.png" id="1_v5xnu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjiq6"]
@@ -109,7 +109,7 @@ states/Walk/position = Vector2(440, 182)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_sfsiq")]
 
 [node name="Enemy_Slime" type="CharacterBody2D" groups=["enemies"]]
-script = ExtResource("1_b32x3")
+script = ExtResource("1_sb2b7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v5xnu")

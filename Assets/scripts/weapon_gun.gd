@@ -10,7 +10,7 @@ extends Node2D
 var can_attack = true
 
 @onready var weapon_sprite = get_node("../Weapon_Gun")
-@onready var bullet_scene = preload("res://bullet.tscn")
+@onready var bullet_scene = preload("res://Assets/Scenes/bullet.tscn")
 
 func _process(delta):
 	weapon_sprite.global_position.y += sin(Time.get_ticks_msec() / 1000.0 * float_speed) * float_amplitude * delta	
