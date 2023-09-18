@@ -8,6 +8,8 @@ signal level_up(new_level)
 @export var max_hp = 10
 var hp = max_hp
 
+var is_alive = true
+
 @export var deadzone = 50
 @export var start: Vector2 = Vector2(0,1)
 
@@ -17,7 +19,7 @@ var hp = max_hp
 var  experience = 0
 var level = 1
 var experience_to_next_level = 100
-
+var game_over_scene_resource
 
 var last_non_zero_velocity_norm = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -28,6 +30,7 @@ func _ready():
 	anim_tree.set("parameters/Idle/blend_position", start)
 	emit_signal("health_changed", hp, max_hp)
 	print("Player ready, initial health: ", hp)
+	game_over_scene_resource = preload("res://Assets/Scenes/game_over_scene.tscn")
 
 # In your player script
 func gain_experience(amount):
@@ -46,6 +49,8 @@ func level_up_player():
 	emit_signal("experience_gained", experience, experience_to_next_level)
 
 func _physics_process(_delta):
+	if not is_alive: 
+		return
 	var target_position = get_global_mouse_position()
 	var direction = target_position - global_position
 	if direction.length() > deadzone:
@@ -90,7 +95,13 @@ func apply_damage(damage):
 		die()
 
 func die():
-	queue_free()
+	is_alive = false
+	# Show the game over scene
+	var game_over_scene = game_over_scene_resource.instantiate()
+	get_tree().get_root().add_child(game_over_scene)
+
+	# Hide player node without removing it to avoid crashing
+	self.visible = false
 
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
