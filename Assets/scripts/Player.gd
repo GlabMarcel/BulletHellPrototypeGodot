@@ -7,7 +7,6 @@ signal level_up(new_level)
 @export var speed = 40
 @export var max_hp = 10
 var hp = max_hp
-
 var is_alive = true
 
 @export var deadzone = 50
@@ -16,13 +15,17 @@ var is_alive = true
 @onready var anim_tree = $AnimationTree
 @onready var weapon = $Weapon_Gun
 
-var  experience = 0
+var experience = 0
 var level = 1
 var experience_to_next_level = 100
 var game_over_scene_resource
 
 var last_non_zero_velocity_norm = Vector2.ZERO
 var velocity = Vector2.ZERO
+
+# Experience multiplier for each level up
+const EXPERIENCE_MULTIPLIER = 1.5
+# Damage to apply when an enemy body enters
 
 func _ready():
 	add_to_group("player")
@@ -44,7 +47,7 @@ func gain_experience(amount):
 func level_up_player():
 	experience = 0
 	level += 1
-	experience_to_next_level *= 1.5  # Increase the experience needed for the next level
+	experience_to_next_level *= EXPERIENCE_MULTIPLIER  # Increase the experience needed for the next level
 	emit_signal("level_up", level)
 	emit_signal("experience_gained", experience, experience_to_next_level)
 
@@ -105,4 +108,4 @@ func die():
 
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
-		apply_damage(1)
+		body.inflict_damage()

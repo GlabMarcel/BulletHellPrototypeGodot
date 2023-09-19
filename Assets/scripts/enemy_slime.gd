@@ -3,7 +3,7 @@ extends CharacterBody2D
 # The player node
 @export var speed = 20
 @export var hp = 1
-
+@export var damage = 1  
 @export var start: Vector2 = Vector2(0,1)
 
 @onready var player = get_node("../Player") 
@@ -48,6 +48,9 @@ func update_anim_param():
 	# Use only the x component of the velocity to set the blend position in the 1D blend space
 	anim_tree["parameters/Walk/blend_position"] = velocity_norm.x
 
+func inflict_damage():
+	if player:
+		player.apply_damage(damage)
 
 
 
